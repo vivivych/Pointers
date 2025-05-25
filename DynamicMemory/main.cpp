@@ -25,11 +25,11 @@ void Print(int arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
 
 
-int* push_back(int arr[], int& n, const int value);
-int* push_front(int arr[], int& n, const int value);
-int* insert(int arr[], int& n, const int value, int index);
-int* pop_back(int arr[], int& n);
-int* pop_front(int arr[], int& n);
+template<typename T>T* push_back(T arr[], int& n, const T value);
+template<typename T>T* push_front(int arr[], int& n, const int value);
+template<typename T>T* insert(T arr[], int& n, const T value, int index);
+template<typename T>T* pop_back(T arr[], int& n);
+template<typename T>T* pop_front(T arr[], int& n);
 int* erase(int arr[], int& n, int index);
 
 template<typename T>T** push_row_back(T** arr, int& rows, const int cols);
@@ -178,11 +178,10 @@ void Print(int** arr, const int rows, const int cols)
 	cout << endl;
 }
 
-
-int* push_back(int arr[], int& n, const int value)
+template<typename T>T* push_back(T arr[], int& n, const T value)
 {
 
-	int* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 
 	for (int i = 0; i < n; i++)
 	{
@@ -196,9 +195,9 @@ int* push_back(int arr[], int& n, const int value)
 	n++;
 	return arr;
 }
-int* push_front(int arr[], int& n, const int value)
+template<typename T>T* push_front(int arr[], int& n, const int value)
 {
-	int* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 	for (int i = 0; i < n; i++)
 	{
 		buffer[i + 1] = arr[i];
@@ -208,9 +207,10 @@ int* push_front(int arr[], int& n, const int value)
 	n++;
 	return buffer;
 }
-int* insert(int arr[], int& n, const int value, int index)
+
+template<typename T>T* insert(T arr[], int& n, const T value, int index)
 {
-	int* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 	for (int i = 0; i < index; i++)
 		buffer[i] = arr[i];
 	for (int i = index; i < n; i++)
@@ -221,17 +221,17 @@ int* insert(int arr[], int& n, const int value, int index)
 	return buffer;
 }
 
-int* pop_back(int arr[], int& n)
+template<typename T>T* pop_back(T arr[], int& n)
 {
-	int* buffer = new int[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++)buffer[i] = arr[i];
 	delete[] arr;
 	return buffer;
 }
 
-int* pop_front(int arr[], int& n)
+template<typename T>T* pop_front(T arr[], int& n)
 {
-	int* buffer = new int[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++)
 	{
 		buffer[i] = arr[i + 1];
